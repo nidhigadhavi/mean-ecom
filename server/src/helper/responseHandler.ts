@@ -11,7 +11,12 @@ export const sendHttpResponse = ({
 	status = 200,
 	...data
 }: IHttpResponse) => {
-    return data.res.status(status).json({
+    // return data.res.status(status).json({
+    //     data: data.data,
+    //     message: data.message,
+    //     status
+    // })
+	return data.res.status(status).json({
         data: data.data,
         message: data.message,
         status

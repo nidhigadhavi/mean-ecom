@@ -4,7 +4,7 @@ dotenv.config();
 
 mongoose.set("strictQuery", false);
 console.log("into db connect");
-mongoose.set("debug", process.env.NODE_ENV !== 'production')
+mongoose.set("debug", process.env.NODE_ENV !== 'production');
 mongoose
 	.connect(process.env.DB_URL!)
 	.then(() => {

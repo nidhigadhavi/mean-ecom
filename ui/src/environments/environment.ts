@@ -3,25 +3,25 @@
 // The list of file replacements can be found in `angular.json`.
 
 // Enums
-import { EnvName } from '@enums/environment.enum';
+import { EnvName } from "@enums/environment.enum";
 
 // Packages
-import packageInfo from '../../package.json';
+import packageInfo from "../../package.json";
 
-const scheme = 'http://';
-const host   = 'localhost';
-const port   = ':5000';
-const path   = '/api/';
+const scheme = "http://";
+const host = "192.168.0.137";
+const port = ":4500";
+const path = "/api/";
 
 const baseUrl = scheme + host + port + path;
 
 export const environment = {
-  production      : false,
-  version         : packageInfo.version,
-  appName         : 'Ecom App',
-  envName         : EnvName.LOCAL,
-  defaultLanguage : 'en',
-  apiBaseUrl      : baseUrl,
+	production: false,
+	version: packageInfo.version,
+	appName: "Ecom App",
+	envName: EnvName.DEV,
+	defaultLanguage: "en",
+	apiBaseUrl: baseUrl,
 };
 
 /*

@@ -3,10 +3,15 @@
       <app-progress-bar *ngIf="isLoading"></app-progress-bar>
       <ng-container *ngIf="!isLoading">
         <div class="text-center">
-          Let's start the project! Organisation !!!
+          Let's start the project! Organisation component!!!!!!
         </div>
       </ng-container>
   
+    </div>    
+    <div class="col d-flex flex-column justify-content-center p-3">
+      <!-- NOTE Content -->
+      <router-outlet></router-outlet>
     </div>
   </app-page-layout>
+  
   

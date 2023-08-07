@@ -1,6 +1,13 @@
-export enum Endpoint
-{
-  AUTHENTICATE     = 'authenticate',
-  FORGOT_PASSWORD  = 'forgot-password',
-  VALIDATE_ACCOUNT = 'validate-account',
+import { environment } from "@env/environment";
+
+export enum Endpoint {	
+	AUTH = "auth/",
+	AUTHENTICATE = "authenticate",
+	LOGIN = "login",
+	LOGOUT = "logout",
+	REGISTER = "register",
+	FORGOT_PASSWORD = "forgot-password",
+	VALIDATE_ACCOUNT = "validate-account",
 }
+
+

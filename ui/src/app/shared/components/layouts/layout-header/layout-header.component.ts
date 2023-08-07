@@ -14,14 +14,15 @@ import { environment } from '@env/environment';
 export class LayoutHeaderComponent implements OnInit
 {
   public appName         : string  = environment.appName;
-  public isMenuCollapsed : boolean = true;
+  public isMenuCollapsed : boolean = true;  
 
   constructor
   (
     private router : Router,
   )
   {
-
+    console.log("into layout header component!!!!");
+    
   }
 
   public ngOnInit() : void

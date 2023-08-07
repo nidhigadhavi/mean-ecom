@@ -15,7 +15,7 @@ export const environment = {
   production      : true,
   version         : packageInfo.version,
   appName         : 'EasyAngular',
-  envName         : EnvName.PROD,
+  envName         : EnvName.DEV,
   defaultLanguage : 'en',
   apiBaseUrl      : baseUrl,
 };

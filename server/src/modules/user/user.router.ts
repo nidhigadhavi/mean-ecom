@@ -8,7 +8,7 @@ const UserRouter = express.Router();
 // get api
 UserRouter.get("/:id", userDetail);
 UserRouter.post("/detail", userDetail1);
-UserRouter.get("/", authMiddleware, userList);
+UserRouter.get("/", userList);
 UserRouter.put("/:id", authMiddleware, editUser);
 UserRouter.delete("/:id", authMiddleware, removeUser);
 

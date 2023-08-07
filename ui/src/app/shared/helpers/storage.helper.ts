@@ -6,13 +6,20 @@ import { environment }  from '@env/environment';
 
 // Enums
 import { StorageKey }   from '@enums/storage-key.enum';
+import { AuthResponse } from '@models/auth-response.model';
 
 // Models
-// import { AuthResponse } from '@models/auth-response.model';
+
 
 @Injectable()
 export class StorageHelper
 {
+  // static removeToken() {
+  //   throw new Error('Method not implemented.');
+  // }
+  // static setToken(authResponse: any) {
+  //   throw new Error('Method not implemented.');
+  // }
   private static storagePrefix : string = environment.appName + '_' + environment.version + '_';
 
   // ----------------------------------------------------------------------------------------------
@@ -21,21 +28,21 @@ export class StorageHelper
 
   // NOTE Token
 
-  // public static setToken(user : AuthResponse) : void
-  // {
-  //   StorageHelper.setItem(StorageKey.TOKEN, user);
-  // }
+  public static setToken(user : AuthResponse) : void
+  {
+    StorageHelper.setItem(StorageKey.TOKEN, user);
+  }
 
-  // public static removeToken() : void
-  // {
-  //   StorageHelper.removeItem(StorageKey.TOKEN);
-  // }
+  public static removeToken() : void
+  {
+    StorageHelper.removeItem(StorageKey.TOKEN);
+  }
 
-  // public static getToken() : AuthResponse | null
-  // {
-  //   const data = StorageHelper.getItem(StorageKey.TOKEN);
-  //   return data ? new AuthResponse(data) : null;
-  // }
+  public static getToken() : AuthResponse | null
+  {
+    const data = StorageHelper.getItem(StorageKey.TOKEN);
+    return data ? data : null;
+  }
 
   // !SECTION Methods
 

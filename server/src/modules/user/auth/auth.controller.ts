@@ -15,10 +15,10 @@ export const login = async (req: Request, res: Response) => {
 		const user: any = await findUser(email, "email");
 
 		if (!user || user == null) {
-			throw new HTTPErrorHandler("user does not exists.", 400);
+			throw new HTTPErrorHandler("User does not exists.", 401);
 		}
 		if (!(await bcrypt.compare(password, user.password!))) {
-			throw new HTTPErrorHandler("invalid password", 401);
+			throw new HTTPErrorHandler("invalid password.", 401);
 		}
 
 		// This payload will be stored in generated JWT token. Don't put sensitive information in it because it is publicly visible.
@@ -44,30 +44,31 @@ export const login = async (req: Request, res: Response) => {
 			data: { ...jwtObj, accessToken },
 			message: "Login successful",
 		});
-		
 	} catch (error) {
+		console.log("into catch::", error);
+
 		errorHandler(res, error);
 	}
 };
 
-export const register = async (req: Request, res: Response) => {	
+export const register = async (req: Request, res: Response) => {
 	const { email, name, password } = req.body;
 	try {
-		const existinguser = await findUser(email,'email');
-		if(existinguser){
-			throw new HTTPErrorHandler('user already exsts.' , 403);
+		const existinguser = await findUser(email, "email");
+		if (existinguser) {
+			throw new HTTPErrorHandler("user already exsts.", 403);
 		}
 		const user = await createUser({
 			email,
 			name,
 			password: await bcrypt.hash(password, 10),
-		});		
+		});
 		return sendHttpResponse({
 			res,
 			data: user!,
 			message: "User Register Successfully!!",
 		});
-	} catch (error) {				
+	} catch (error) {
 		errorHandler(res, error);
 	}
 };

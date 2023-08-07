@@ -5,12 +5,14 @@ import { OrganisationRoutingModule } from './organisation-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RoleComponent } from './role/role.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { LeaveComponent } from './leave/leave.component';
 
 @NgModule({
   declarations: [
     OrganisationComponent,
     RoleComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    LeaveComponent
   ],
   imports: [
     CommonModule,

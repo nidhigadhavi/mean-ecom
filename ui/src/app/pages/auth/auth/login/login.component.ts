@@ -1,90 +1,103 @@
 // Angular modules
-import { Component }    from '@angular/core';
-import { FormGroup }    from '@angular/forms';
-import { FormControl }  from '@angular/forms';
-import { Validators }   from '@angular/forms';
-import { Router }       from '@angular/router';
+import { Component, ElementRef, ViewChild } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { FormControl } from "@angular/forms";
+import { Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 // Internal modules
-import { environment }  from '@env/environment';
+import { environment } from "@env/environment";
 
 // Services
-import { AppService }   from '@services/app.service';
-import { StoreService } from '@services/store.service';
+import { AppService } from "@services/app.service";
+import { StoreService } from "@services/store.service";
 
 @Component({
-  selector    : 'app-login',
-  templateUrl : './login.component.html',
-  styleUrls   : ['./login.component.scss']
+	selector: "app-login",
+	templateUrl: "./login.component.html",
+	styleUrls: ["./login.component.scss"],
 })
-export class LoginComponent
-{
-  public appName : string = environment.appName;
-  public formGroup !: FormGroup<{
-    email    : FormControl<string>,
-    password : FormControl<string>,
-  }>;
+export class LoginComponent {
+	public appName: string = environment.appName;
 
-  constructor
-  (
-    private router       : Router,
-    private storeService : StoreService,
-    private appService   : AppService,
-  )
-  {
-    this.initFormGroup();
-  }
+	public formGroup!: FormGroup<{
+		email: FormControl<string>;
+		password: FormControl<string>;
+	}>;
 
-  // -------------------------------------------------------------------------------
-  // NOTE Init ---------------------------------------------------------------------
-  // -------------------------------------------------------------------------------
+	title = "loginGoogle";
 
-  private initFormGroup() : void
-  {
-    this.formGroup = new FormGroup({
-      email      : new FormControl<string>({
-        value    : '',
-        disabled : false
-      }, { validators : [Validators.required, Validators.email], nonNullable : true }),
-      password   : new FormControl<string>({
-        value    : '',
-        disabled : false
-      }, { validators : [Validators.required], nonNullable : true })
-    });
-  }
+	auth2: any;
 
-  // -------------------------------------------------------------------------------
-  // NOTE Actions ------------------------------------------------------------------
-  // -------------------------------------------------------------------------------
+	@ViewChild("loginRef", { static: true }) loginElement!: ElementRef;
+  googleAuthSDK: any;
 
-  public async onClickSubmit() : Promise<void>
-  {
-    await this.authenticate();
-  }
+	constructor(
+		private router: Router,
+		private storeService: StoreService,
+		private appService: AppService
+	) {
+		this.initFormGroup();
+	}
+	ngOnInit() {
+		this.googleAuthSDK();
+	}
 
-  // -------------------------------------------------------------------------------
-  // NOTE Requests -----------------------------------------------------------------
-  // -------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------
+	// NOTE Init ---------------------------------------------------------------------
+	// -------------------------------------------------------------------------------
 
-  private async authenticate() : Promise<void>
-  {
-    this.storeService.setIsLoading(true);
+	private initFormGroup(): void {
+		this.formGroup = new FormGroup({
+			email: new FormControl<string>(
+				{
+					value: "",
+					disabled: false,
+				},
+				{
+					validators: [Validators.required, Validators.email],
+					nonNullable: true,
+				}
+			),
+			password: new FormControl<string>(
+				{
+					value: "",
+					disabled: false,
+				},
+				{ validators: [Validators.required], nonNullable: true }
+			),
+		});
+	}
 
-    const email    = this.formGroup.controls.email.getRawValue();
-    const password = this.formGroup.controls.password.getRawValue();
-    const success  = await this.appService.authenticate(email, password);
+	// -------------------------------------------------------------------------------
+	// NOTE Actions ------------------------------------------------------------------
+	// -------------------------------------------------------------------------------
 
-    this.storeService.setIsLoading(false);
+	public async onClickSubmit(): Promise<void> {
+		console.log("1!!");
+		await this.authenticate();
+	}
 
-    if (!success)
-      return;
+	// -------------------------------------------------------------------------------
+	// NOTE Requests -----------------------------------------------------------------
+	// -------------------------------------------------------------------------------
 
-    // NOTE Redirect to home
-    this.router.navigate(['/home']);
-  }
+	private async authenticate(): Promise<void> {
+		this.storeService.setIsLoading(true);
+		console.log("2");
+		const email = this.formGroup.controls.email.getRawValue();
+		const password = this.formGroup.controls.password.getRawValue();
+		const success = await this.appService.authenticate(email, password);
 
-  // -------------------------------------------------------------------------------
-  // NOTE Helpers ------------------------------------------------------------------
-  // -------------------------------------------------------------------------------
+		this.storeService.setIsLoading(false);
 
+		if (!success) return;
+
+		// NOTE Redirect to home
+		this.router.navigate(["/organisation"]);
+	}
+
+	// -------------------------------------------------------------------------------
+	// NOTE Helpers ------------------------------------------------------------------
+	// -------------------------------------------------------------------------------
 }

@@ -6,12 +6,12 @@ import { RoleModule } from './role/role.module';
 import { EmployeeComponent } from './employee/employee.component';
 
 const router: Routes = [
+  { path: '', component: OrganisationComponent },
+  { path: 'employee', component: EmployeeComponent },
   {
     path: 'role',
     loadChildren: () => import('./role/role.module').then((m) => m.RoleModule),
   },
-  { path: '', component: OrganisationComponent },
-  { path: 'employee', component: EmployeeComponent },
 ];
 
 @NgModule({

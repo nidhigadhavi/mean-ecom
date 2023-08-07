@@ -13,8 +13,7 @@
       <!-- NOTE Email -->
       <div class="mb-3">
         <label for="email" class="form-label text-start w-100">{{ 'EMAIL' | translate }}</label>
-        <input type="email" class="form-control" id="email"
-          formControlName="email"
+        <input type="email" class="form-control" id="email" formControlName="email"
           [ngClass]="{ 'is-invalid' : formGroup.controls.email.errors && formGroup.controls.email.touched }">
         <!-- NOTE Errors -->
         <div class="invalid-feedback" *ngIf="formGroup.controls.email.hasError('required')">
@@ -28,8 +27,7 @@
       <!-- NOTE Password -->
       <div class="mb-3">
         <label for="password" class="form-label text-start w-100">{{ 'PASSWORD' | translate }}</label>
-        <input type="password" class="form-control" id="password"
-          formControlName="password"
+        <input type="password" class="form-control" id="password" formControlName="password"
           [ngClass]="{ 'is-invalid' : formGroup.controls.password.errors && formGroup.controls.password.touched }">
         <!-- NOTE Errors -->
         <div class="invalid-feedback" *ngIf="formGroup.controls.password.hasError('required')">
@@ -47,6 +45,11 @@
       <div class="text-center">
         <button type="submit" class="btn btn-primary mb-3 px-5" [disabled]="!formGroup.valid">
           <span class="px-4 d-block">{{ 'SIGN_IN' | translate }}</span>
+        </button>
+      </div>
+
+      <div class="text-center"> <button class="btn btn-danger" #loginRef>
+          Login with Google
         </button>
       </div>
 
